@@ -172,7 +172,7 @@ public class Obsrvus {
 		taskIsRunning = true;
 
 		while (true) {
-			var item = queueItems.FirstOrDefault(i => !i.Uploaded.HasValue);
+			var item = queueItems.FirstOrDefault(i => !i.Uploaded);
 
 			if (item == null)
 				break;
@@ -187,7 +187,7 @@ public class Obsrvus {
 
 		// Remove all uploaded items.
 		queueItems = queueItems
-			.Where(i => !i.Uploaded.HasValue)
+			.Where(i => i.Uploaded)
 			.ToList();
 
 		taskIsRunning = false;
@@ -220,6 +220,6 @@ public class Obsrvus {
 		/// <summary>
 		/// Whether or not the payload has been uploaded.
 		/// </summary>
-		public bool? Uploaded { get; set; }
+		public bool Uploaded { get; set; }
 	}
 }
